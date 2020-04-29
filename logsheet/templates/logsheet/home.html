@@ -1,0 +1,19 @@
+
+{% extends "logsheet/base.html" %}
+{% block content %}
+<h1>Attendance</h1>
+
+	{% for logpost in logposts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">Date</a>
+              <small class="text-muted">{{logpost.signIn|date:"F d, Y l" }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ logpost.member }}</a></h2>
+            <p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
+          </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
