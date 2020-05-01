@@ -1,7 +1,7 @@
 
 {% extends "logsheet/base.html" %}
 {% block content %}
-<h1>Attendance</h1>
+<h1 class="mb-3">Signed by {{ view.kwargs.firstName }} ({{ page_obj.paginator.count }})</h1>
 
 	{% for logpost in logposts %}
         <article class="media content-section">
@@ -9,9 +9,9 @@
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">Date</a>
-              <small class="text-muted">{{logpost.signIn|date:"F d, Y l" }}</small>
+              <small class="text-muted">{{ logpost.signIn|date:"F d, Y l" }}</small>
             </div>
-            <h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ logpost.member }}</a></h2>
+            <h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ object.member }}</a></h2>
             <p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
           </div>
         </article>

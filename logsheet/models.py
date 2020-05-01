@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from persons.models import Employee, Member
+from django.urls import reverse
 
 
 class LogPost(models.Model):
@@ -11,6 +12,9 @@ class LogPost(models.Model):
     def __repr__(self):
         return "(%r)" % (self.signIn)
 
+#    def get_ablsolute_url(self):
+#        return reverse('success')
+
 class TimeSheet(models.Model):
     member = models.ForeignKey(Employee, on_delete=models.CASCADE)
     signIn = models.DateTimeField(default=timezone.now)
@@ -18,3 +22,7 @@ class TimeSheet(models.Model):
 
     def __repr__(self):
         return "(%r)" % (self.signIn)
+
+    def get_ablsolute_url(self):
+        #timesheet-detail doesn't exist yet
+        return reverse('timesheet-detail', kwargs={'pk': self.pk})

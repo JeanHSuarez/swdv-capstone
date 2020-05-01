@@ -25,7 +25,7 @@ SECRET_KEY = '-ci5gzf3s)6+36_frj%pxh4=ds=f91sy$ov=@)rb=-74t2e(ad'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['timekeepingapp.herokuapp.com']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -125,10 +125,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'logsheet-home'
 
 LOGIN_URL = 'login'
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.s3Boto3Storage'
