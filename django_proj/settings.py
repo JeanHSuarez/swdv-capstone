@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['timekeepingapp.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'persons.apps.PersonsConfig',
     'logsheet.apps.LogsheetConfig',
     'crispy_forms',
@@ -136,6 +137,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'logsheet-home'
 
 LOGIN_URL = 'login'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
