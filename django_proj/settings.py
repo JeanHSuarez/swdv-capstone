@@ -25,7 +25,7 @@ SECRET_KEY = '-ci5gzf3s)6+36_frj%pxh4=ds=f91sy$ov=@)rb=-74t2e(ad'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://timekeepingapp.herokuapp.com/']
+ALLOWED_HOSTS = ['timekeepingapp.herokuapp.com']
 
 
 # Application definition
