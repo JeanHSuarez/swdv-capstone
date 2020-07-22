@@ -1,6 +1,6 @@
 # SWDV-Capstone
 
-The project is a timekeeping web application tailored-fit to a particular mode of
+This project is a timekeeping web application tailored-fit to a particular mode of
 service in the healthcare industry. There are many timekeeping applications in the market
 today. Almost all of these timekeeping applications available in the market are either too
 broad or demands a steep learning curve for users. The problem with being too broad is
