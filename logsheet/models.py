@@ -16,7 +16,7 @@ class LogPost(models.Model):
 #        return reverse('success')
 
 class TimeSheet(models.Model):
-    member = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     signIn = models.DateTimeField(default=timezone.now)
     signOut = models.DateTimeField(null=True, blank=True)
 
