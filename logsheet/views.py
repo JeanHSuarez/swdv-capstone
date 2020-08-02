@@ -19,6 +19,7 @@ from .models import LogPost
     }
     return render(request, 'logsheet/home.html', context)"""
 
+
 class PostListView(ListView):
     model = LogPost
     template_name ='logsheet/home.html' # <app>/<model>_<viewtype>.html
@@ -39,6 +40,8 @@ class MemberPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = LogPost
+
+#old code as reference
 """
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = LogPost
