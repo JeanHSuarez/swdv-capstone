@@ -14,7 +14,7 @@ class LogPost(models.Model):
 
 #    def get_ablsolute_url(self):
 #        return reverse('success')
-
+"""
 class TimeSheet(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     signIn = models.DateTimeField(default=timezone.now)
@@ -26,3 +26,4 @@ class TimeSheet(models.Model):
     def get_ablsolute_url(self):
         #timesheet-detail doesn't exist yet
         return reverse('timesheet-detail', kwargs={'pk': self.pk})
+"""
