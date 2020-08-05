@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from persons.models import Member
+from django.utils import timezone
 from django.views.generic import (
          ListView,
          DetailView,
@@ -81,6 +82,7 @@ class PostCreateView(CreateView):
     success_url = '/logsheet/'
 
     def form_valid(self, form):
+        self.object.signIn = timezone.now()
         return super().form_valid(form)
 
 class PostUpdateView(UpdateView):
@@ -89,6 +91,8 @@ class PostUpdateView(UpdateView):
     success_url = '/logsheet/'
 
     def form_valid(self, form):
+        self.object.signOut = timezone.now()
+        self.object.setDuration()
         return super().form_valid(form)
 #test for current user. Might not need this or need to modify
 

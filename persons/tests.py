@@ -12,4 +12,4 @@ class PersonTestCase(TestCase):
 		self.assertEqual(jude.ssn, "123456789")
 
 
-# Create your tests here. 
+
