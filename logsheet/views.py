@@ -42,6 +42,36 @@ class MemberPostListView(ListView):
 class PostDetailView(DetailView):
     model = LogPost
 
+class PostCreateView(CreateView):
+    model = LogPost
+    fields= ('member',)
+    success_url = '/logsheet/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class PostUpdateView(UpdateView):
+    model = LogPost
+    fields= ('member',)
+    success_url = '/logsheet/'
+
+    def form_valid(self, form):
+        self.object.signOut = timezone.now()
+        self.object.setDuration()
+        return super().form_valid(form)
+#test for current user. Might not need this or need to modify
+
+class PostDeleteView(DeleteView):
+    model = LogPost
+    success_url = '/logsheet/'
+#test for current user. Might not need this or need to modify
+
+
+
+
+
+
+
 #old code as reference
 """
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -75,33 +105,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 """
-
-class PostCreateView(CreateView):
-    model = LogPost
-    fields= ('member', 'signIn', 'signOut')
-    success_url = '/logsheet/'
-
-    def form_valid(self, form):
-        self.object.signIn = timezone.now()
-        return super().form_valid(form)
-
-class PostUpdateView(UpdateView):
-    model = LogPost
-    fields= ('member', 'signIn', 'signOut')
-    success_url = '/logsheet/'
-
-    def form_valid(self, form):
-        self.object.signOut = timezone.now()
-        self.object.setDuration()
-        return super().form_valid(form)
-#test for current user. Might not need this or need to modify
-
-class PostDeleteView(DeleteView):
-    model = LogPost
-    success_url = '/logsheet/'
-#test for current user. Might not need this or need to modify
-
-
 
 
 """
