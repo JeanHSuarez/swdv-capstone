@@ -54,12 +54,10 @@ def create_member(request):
             diagnosis = form.cleaned_data.get('diagnosis')
             member = Member(ssn=ssn, firstName=firstName, middleName=middleName, lastName=lastName, diagnosis=diagnosis)
             member.save()
-            messages.success(request, f'Account has been created for {ssn}!')
-            return redirect('login')
+            messages.success(request, f'New Member {firstName} {lastName} has been created!')
+            return redirect('logsheet-home')
             
         else:
-            print("debug Line 2")
-            print(str(form))
             return redirect('login')
     else:
         form = MemberRegistrationForm()

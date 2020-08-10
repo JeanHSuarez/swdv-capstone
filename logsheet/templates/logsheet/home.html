@@ -11,8 +11,15 @@
               <a class="mr-2" href="#">Date</a>
               <small class="text-muted">{{logpost.signIn|date:"F d, Y l" }}</small>
             </div>
-            <h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ logpost.member }}</a></h2>
-            <p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
+			<h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ logpost.member }}</a></h2>
+			<p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
+			{% if logpost.signOut %}
+				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Update</a></p>
+			{% else %}
+				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Sign Out</a></p>
+			{% endif %}
+
+
           </div>
         </article>
     {% endfor %}

@@ -31,7 +31,7 @@ class Member(Person):
     dischargeDate = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.firstName} Member'
+        return f'{self.firstName} {self.lastName}'
 
 class Employee(Person):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -42,4 +42,4 @@ class Employee(Person):
     otherInfo = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Employee'
+        return f'{self.user.username}'
