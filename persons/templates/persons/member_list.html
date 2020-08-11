@@ -1,25 +1,17 @@
 
 {% extends "logsheet/base.html" %}
 {% block content %}
-<a class="btn btn-secondary btn-med mt-1 mb-1" href="{% url 'logpost-create' %}">Member Sign In</a>
-<h1>Attendance</h1>
 
-	{% for logpost in logposts %}
+<h1>Members</h1>
+
+	{% for member in members %}
         <article class="media content-section">
-					<img class="rounded-circle article-image" src={{ logpost.member.person.image.url }}>
+					<img class="rounded-circle article-image" src={{ member.person.image.url }}>
           <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">Date</a>
-              <small class="text-muted">{{logpost.signIn|date:"F d, Y l" }}</small>
-            </div>
-			<h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ logpost.member }}</a></h2>
-			<p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
-			{% if logpost.signOut %}
-				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Update</a></p>
-			{% else %}
-				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Sign Out</a></p>
-			{% endif %}
-
+            
+			<h2><a class="article-title" href="{% url 'member-detail' member.id%}">{{ member }}</a></h2>
+			
+			
 
           </div>
         </article>

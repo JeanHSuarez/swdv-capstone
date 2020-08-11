@@ -110,3 +110,5 @@ class DailyReport(models.Model):
     def __repr__(self):
         return f'(summaryDate={self.summaryDate}, signInCount={self.signInCount}, signOutCount={self.signOutCount}, totalDuration={self.totalDuration})'
 
+
+    

@@ -1,0 +1,23 @@
+
+{% extends "logsheet/base.html" %}
+{% block content %}
+<h1>Member Profile</h1>
+
+
+    <article class="media content-section">
+			<img class="rounded-circle article-image" src={{ object.author.profile.image.url }}>
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">Date</a>
+          <small class="text-muted">{{ object.firstName }}</small>
+         
+        </div>
+        <h2 class="article-title">{{ object.member }}</h2>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logsheet-reports' object.id %}">Sign Out</a>
+      
+
+      </div>
+    </article>
+
+
+{% endblock %}

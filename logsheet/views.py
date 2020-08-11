@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from datetime import date
+from .forms import GenerateReportForm
+from django.views.generic.edit import FormView
 from persons.models import Member
 from django.utils import timezone
 from django.views.generic import (
@@ -10,7 +13,7 @@ from django.views.generic import (
          UpdateView,
          DeleteView
          )
-from .models import LogPost
+from .models import LogPost, DailyAggregator, DailyReport
 
 
 """def home(request):
@@ -66,9 +69,41 @@ class PostDeleteView(DeleteView):
     success_url = '/logsheet/'
 #test for current user. Might not need this or need to modify
 
+#Reports Aggregators
+class ReportView(ListView):
+    model = DailyReport
+    #template_name ='logsheet/reports.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'reports'
+    success_url = 'logsheet-reports'
+    paginate_by = 10
 
+class MemberDetailView(DetailView):
+    model = Member
 
+class GenerateReportView(FormView):
+    template_name = 'logsheet/dailyaggregator_form.html'
+    form_class = GenerateReportForm
+    success_url = '/logsheet/reports/'
 
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        sumDate = form.cleaned_data.get('sumDate')
+        sumDate = date.fromisoformat(sumDate)
+        LogPost.generateDailyGrandTotal(sumDate.year, sumDate.month, sumDate.day)
+        return super().form_valid(form)
+
+"""
+class DailyMemberReportCreateView(CreateView):
+    model = DailyAggregator
+    fields = ('id', 'member' , 'summaryDate')
+    success_url = 'logsheet-reports'
+
+    def form_valid(self, form):
+        #LogPost.generateReport(member.id, 'summaryDate')
+        return super().form_valid(form)
+
+"""
 
 
 
@@ -115,5 +150,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return super().form_valid(form)
 """
 
-def reports(request):
-    return render(request, 'logsheet/reports.html', {'title': 'Reports'})

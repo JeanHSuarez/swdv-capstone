@@ -5,7 +5,10 @@ from .views import (PostListView,
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
-    MemberPostListView
+    MemberPostListView,
+    ReportView,
+    MemberDetailView,
+    GenerateReportView
     )
 from . import views
 
@@ -16,5 +19,7 @@ urlpatterns = [
     path('logpost/new/', PostCreateView.as_view(), name='logpost-create'),
     path('logpost/<int:pk>/update/', PostUpdateView.as_view(), name='logpost-update'),
     path('logpost/<int:pk>/delete/', PostDeleteView.as_view(), name='logpost-delete'),
-    path('reports/', views.reports, name='logsheet-reports'),
+    path('reports/', ReportView.as_view(), name='logsheet-reports'),
+    path('member/<int:pk>/', MemberDetailView.as_view(), name='member-detail'),
+    path('generatereport/', GenerateReportView.as_view(), name='generate-report')
 ]
