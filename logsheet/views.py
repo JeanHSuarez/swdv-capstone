@@ -15,15 +15,6 @@ from django.views.generic import (
          )
 from .models import LogPost, DailyAggregator, DailyReport
 
-
-"""def home(request):
-
-    context = {
-        'logposts': LogPost.objects.all()
-    }
-    return render(request, 'logsheet/home.html', context)"""
-
-
 class PostListView(ListView):
     model = LogPost
     template_name ='logsheet/home.html' # <app>/<model>_<viewtype>.html
@@ -55,7 +46,7 @@ class PostCreateView(CreateView):
 
 class PostUpdateView(UpdateView):
     model = LogPost
-    fields= ('member',)
+    fields= ('signOut',)
     success_url = '/logsheet/'
 
     def form_valid(self, form):
@@ -72,13 +63,10 @@ class PostDeleteView(DeleteView):
 #Reports Aggregators
 class ReportView(ListView):
     model = DailyReport
-    #template_name ='logsheet/reports.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'reports'
     success_url = 'logsheet-reports'
+    ordering = ['-createdAt']
     paginate_by = 10
-
-class MemberDetailView(DetailView):
-    model = Member
 
 class GenerateReportView(FormView):
     template_name = 'logsheet/dailyaggregator_form.html'
@@ -92,6 +80,30 @@ class GenerateReportView(FormView):
         sumDate = date.fromisoformat(sumDate)
         LogPost.generateDailyGrandTotal(sumDate.year, sumDate.month, sumDate.day)
         return super().form_valid(form)
+
+#MemberViewClasses EXCEPT: the CreateMember function which is located in persons/view
+
+class MemberListView(ListView):
+    model = Member
+    template_name ='logsheet/member_list.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'members'
+    paginate_by = 10
+
+class MemberDetailView(DetailView):
+    model = Member
+
+class MemberUpdateView(UpdateView):
+    model = Member
+    fields= ('ssn', 'firstName', 'middleName', 'lastName', 'diagnosis')
+    success_url = '/logsheet/members/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+#test for current user. Might not need this or need to modify
+
+class MemberDeleteView(DeleteView):
+    model = Member
+    success_url = '/logsheet/members/'
 
 """
 class DailyMemberReportCreateView(CreateView):

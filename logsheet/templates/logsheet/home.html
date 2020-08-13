@@ -1,8 +1,10 @@
 
 {% extends "logsheet/base.html" %}
 {% block content %}
-<a class="btn btn-secondary btn-med mt-1 mb-1" href="{% url 'logpost-create' %}">Member Sign In</a>
-<h1>Attendance</h1>
+<a class="btn btn-secondary btn-med mt-1 mb-1" href="{% url 'logpost-create' %}">Click Here to Sign In</a>
+<br>
+<br>
+<h2>Attendance</h2>
 
 	{% for logpost in logposts %}
         <article class="media content-section">
@@ -15,6 +17,7 @@
 			<h2><a class="article-title" href="{% url 'logpost-detail' logpost.id%}">{{ logpost.member }}</a></h2>
 			<p class="article-content">Sign In: {{ logpost.signIn|date:"g:i a" }} Sign Out: {{ logpost.signOut|date:"g:i a" }}</p>
 			{% if logpost.signOut %}
+				<p class="article-content">Duration: {{ logpost.duration|floatformat:"0" }} minutes</p>
 				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Update</a></p>
 			{% else %}
 				<p><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logpost-detail' logpost.id%}">Sign Out</a></p>

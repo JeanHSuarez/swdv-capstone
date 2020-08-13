@@ -5,15 +5,20 @@
 
 
     <article class="media content-section">
-			<img class="rounded-circle article-image" src={{ object.author.profile.image.url }}>
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">Date</a>
-          <small class="text-muted">{{ object.firstName }}</small>
+          <a class="mr-2">Member Profile</a>
+          
          
         </div>
-        <h2 class="article-title">{{ object.member }}</h2>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'logsheet-reports' object.id %}">Sign Out</a>
+        <h2 class="article-title" ref="{% url 'member-update' object.id %}">{{ object.member }}</h2>
+        <p>
+        <small class="text-muted">Social Security Number: {{ object.member.ssn }}</small>
+        <br>
+        <small class="text-muted">Diagnosis: {{ object.member.diagnosis }}</small>
+        </p>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'member-update' object.id %}">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'member-delete' object.id %}">Delete</a>
       
 
       </div>

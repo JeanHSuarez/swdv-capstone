@@ -43,8 +43,6 @@ def profile(request):
 
 def create_member(request):
     if request.method == 'POST':
-        print("debug Line 1")
-        print(request.POST)
         form = MemberRegistrationForm(request.POST)
         if form.is_valid():
             ssn = form.cleaned_data.get('ssn')
@@ -63,7 +61,4 @@ def create_member(request):
         form = MemberRegistrationForm()
 
     return render(request, 'persons/create_member.html', {'form': form})
- 
-
-
  

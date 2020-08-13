@@ -21,21 +21,22 @@
 	<header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'logsheet-home' %}">Akyurasi</a>
+          <a class="navbar-brand mr-4" href="{% url 'logsheet-home' %}">AKYURASI</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'logsheet-home' %}">LogSheet</a>
+              <a class="nav-item nav-link" href="{% url 'logsheet-home' %}">Log Sheet</a>
+              <a class="nav-item nav-link" href="{% url 'member-list' %}">Members</a>
               <a class="nav-item nav-link" href="{% url 'logsheet-reports' %}">Reports</a>
+
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                  <a class="nav-item nav-link" href="{% url 'logpost-create' %}">Member Sign In</a>
                   <a class="nav-item nav-link" href="{% url 'create_member' %}">Create Member</a>
-									<a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+									<a class="nav-item nav-link" href="{% url 'profile' %}">Staff Profile</a>
 									<a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
 							{% else %}
                   <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
@@ -59,6 +60,7 @@
           {% block content %}{% endblock %}
 
         </div>
+      
         <div class="col-md-4">
           <div class="content-section">
             <h3>SWDV 691</h3>
@@ -70,6 +72,7 @@
                 <li class="list-group-item list-group-item-light">Announcements</li>
                 <li class="list-group-item list-group-item-light">Socials</li>
                 <li class="list-group-item list-group-item-light">Menu for Today</li>
+          
               </ul>
             </p>
           </div>

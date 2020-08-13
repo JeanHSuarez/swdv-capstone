@@ -5,6 +5,8 @@ from persons.models import Employee, Member
 from django.urls import reverse
 from datetime import date
 
+time = timezone.localtime() 
+
 
 class LogPost(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
@@ -71,7 +73,9 @@ class LogPost(models.Model):
         summary.signInCount = signInCount
         summary.signOutCount = signOutCount
         summary.totalDuration = totalDuration
+        summary.getTotalBillingUnits()
         summary.save()
+        
 
 
 
@@ -104,8 +108,13 @@ class DailyReport(models.Model):
     signInCount = models.IntegerField(default=0, null=False)
     signOutCount = models.IntegerField(default=0, null=False)
     totalDuration = models.FloatField(default=0.0, null=False)
+    totalBillingUnits = models.FloatField(default=0, null=False)
     createdAt = models.DateTimeField(default=timezone.now)
     updatedAt = models.DateTimeField(default=timezone.now)
+
+    def getTotalBillingUnits(self):
+        totalBillingUnits = self.totalDuration / 15
+        self.totalBillingUnits = totalBillingUnits
 
     def __repr__(self):
         return f'(summaryDate={self.summaryDate}, signInCount={self.signInCount}, signOutCount={self.signOutCount}, totalDuration={self.totalDuration})'

@@ -36,15 +36,6 @@ class MemberRegistrationForm(forms.Form):
     
 
 
-class MemberUpdateForm(forms.ModelForm):
-    ssn = forms.CharField()
-
-    class Meta:
-        model = Member
-        fields = ['firstName', 'middleName', 'lastName', 'diagnosis', 'intakeDate']
-
-
-
 
 """
 

@@ -6,8 +6,11 @@
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
-					<legend class="border-bottom mb-4">Confirm Sign OUt</legend>
+					<legend class="border-bottom mb-4">Sign Out</legend>
+					<p>Click Sign Out to confirm current timestamp.</p>
+					<p>Use the field below to edit sign out data (<i>yyyy-mm-dd hh:mm:ss</i>).</p>
 					{{ form|crispy }}
+					
 				</fieldset>
 				<div class="form-group">
 					<button class="btn btn-outline-info" type="submit">Sign OUt</button>

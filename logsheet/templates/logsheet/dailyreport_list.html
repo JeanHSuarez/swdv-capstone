@@ -4,19 +4,27 @@
 <h1>Reports Page</h1>
 
 <div class="content-section">
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'generate-report' %}">Generate Report</a>
     <ol>
     {% for report in reports %}
         <li> 
-            {{ report.summaryDate }}
-            {{ report.signInCount }}
-            {{ report.signOutCount }}
-            {{ report.totalDuration }}
+            <p class="article-content">Date: {{ report.summaryDate }}
+            Sign In: {{ report.signInCount }}
+            Sign Out: {{ report.signOutCount }}
+            Duration in Minutes: {{ report.totalDuration|floatformat:"0" }}
+            Total Billing Units: {{ report.totalBillingUnits|floatformat:"0" }}
+            
+            </p>
         </li>
 
 
     {% endfor %}
+
+    
     </ol>
+
 </div>
+
 
 {% endblock %}
 
