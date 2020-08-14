@@ -27,7 +27,7 @@ class EmployeeUpdateForm(forms.ModelForm):
 #Creating Member
 
 class MemberRegistrationForm(forms.Form):
-    ssn = forms.CharField(label='Enter Social Security Number: ', min_length=10, max_length=10)
+    ssn = forms.CharField(label='Enter Social Security Number: ', min_length=9, max_length=9)
     firstName = forms.CharField(label='Enter First Name', min_length=0, max_length=150)
     middleName = forms.CharField(label='Enter Middle Name', min_length=0, max_length=150)
     lastName = forms.CharField(label='Enter Last Name', min_length=0, max_length=150)

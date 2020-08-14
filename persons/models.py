@@ -6,7 +6,7 @@ from PIL import Image
 
 class Person(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    ssn = models.CharField(max_length=10)
+    ssn = models.CharField(max_length=9)
     birthDate = models.DateTimeField(null=True, blank=True)
 
     # def save(self, *args, **kwargs):
