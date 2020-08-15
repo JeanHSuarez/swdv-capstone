@@ -50,7 +50,7 @@ class PostUpdateView(UpdateView):
     success_url = '/logsheet/'
 
     def form_valid(self, form):
-        self.object.signOut = timezone.now
+        self.object.signOut = timezone.now()
         self.object.setDuration()
         return super().form_valid(form)
 #test for current user. Might not need this or need to modify
