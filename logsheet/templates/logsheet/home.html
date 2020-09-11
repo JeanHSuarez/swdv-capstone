@@ -1,6 +1,11 @@
 
 {% extends "logsheet/base.html" %}
 {% block content %}
+{% load tz %}
+
+
+
+
 <a class="btn btn-secondary btn-med mt-1 mb-1" href="{% url 'logpost-create' %}">Click Here to Sign In</a>
 <br>
 <br>
@@ -49,6 +54,8 @@
 		    {% endif %}
 			
 		{% endif %}
-		
+
+
+
 
 {% endblock %}

@@ -15,14 +15,14 @@ from django.views.generic import (
          )
 from .models import LogPost, DailyAggregator, DailyReport
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin,ListView):
     model = LogPost
     template_name ='logsheet/home.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'logposts'
     ordering = ['-signIn']
     paginate_by = 10
 
-class MemberPostListView(ListView):
+class MemberPostListView(LoginRequiredMixin, ListView):
     model = LogPost
     template_name ='logsheet/member_logposts.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'logposts'
@@ -33,10 +33,10 @@ class MemberPostListView(ListView):
         return LogPost.objects.filter(member=member).order_by('-signIn')
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = LogPost
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = LogPost
     fields= ('member',)
     success_url = '/logsheet/'
@@ -44,7 +44,7 @@ class PostCreateView(CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = LogPost
     fields= ('signOut',)
     success_url = '/logsheet/'
@@ -55,20 +55,20 @@ class PostUpdateView(UpdateView):
         return super().form_valid(form)
 #test for current user. Might not need this or need to modify
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = LogPost
     success_url = '/logsheet/'
 #test for current user. Might not need this or need to modify
 
 #Reports Aggregators
-class ReportView(ListView):
+class ReportView(LoginRequiredMixin, ListView):
     model = DailyReport
     context_object_name = 'reports'
     success_url = 'logsheet-reports'
     ordering = ['-createdAt']
     paginate_by = 10
 
-class GenerateReportView(FormView):
+class GenerateReportView(LoginRequiredMixin, FormView):
     template_name = 'logsheet/dailyaggregator_form.html'
     form_class = GenerateReportForm
     success_url = '/logsheet/reports/'
@@ -83,16 +83,16 @@ class GenerateReportView(FormView):
 
 #MemberViewClasses EXCEPT: the CreateMember function which is located in persons/view
 
-class MemberListView(ListView):
+class MemberListView(LoginRequiredMixin, ListView):
     model = Member
     template_name ='logsheet/member_list.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'members'
     paginate_by = 10
 
-class MemberDetailView(DetailView):
+class MemberDetailView(LoginRequiredMixin, DetailView):
     model = Member
 
-class MemberUpdateView(UpdateView):
+class MemberUpdateView(LoginRequiredMixin, UpdateView):
     model = Member
     fields= ('ssn', 'firstName', 'middleName', 'lastName', 'diagnosis')
     success_url = '/logsheet/members/'
@@ -101,7 +101,7 @@ class MemberUpdateView(UpdateView):
         return super().form_valid(form)
 #test for current user. Might not need this or need to modify
 
-class MemberDeleteView(DeleteView):
+class MemberDeleteView(LoginRequiredMixin, DeleteView):
     model = Member
     success_url = '/logsheet/members/'
 

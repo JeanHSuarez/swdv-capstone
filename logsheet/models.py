@@ -5,12 +5,12 @@ from persons.models import Employee, Member
 from django.urls import reverse
 from datetime import date
 
-time = timezone.localtime() 
+time = timezone.localtime(timezone.now()) 
 
 
 class LogPost(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    signIn = models.DateTimeField(default=timezone.now)
+    signIn = models.DateTimeField(default=time)
     signOut = models.DateTimeField(null=True, blank=True)
     duration =  models.FloatField(null=True, blank=True)
 
@@ -96,8 +96,8 @@ class DailyAggregator(models.Model):
     signInCount = models.IntegerField(default=0, null=False)
     signOutCount = models.IntegerField(default=0, null=False)
     totalDuration = models.FloatField(default=0.0, null=False)
-    createdAt = models.DateTimeField(default=timezone.now)
-    updatedAt = models.DateTimeField(default=timezone.now)
+    createdAt = models.DateTimeField(default=time)
+    updatedAt = models.DateTimeField(default=time)
 
     def __repr__(self):
         return f'(summaryDate={self.summaryDate}, memberId={self.member_id}, signInCount={self.signInCount}, signOutCount={self.signOutCount}, totalDuration={self.totalDuration})'
@@ -109,8 +109,8 @@ class DailyReport(models.Model):
     signOutCount = models.IntegerField(default=0, null=False)
     totalDuration = models.FloatField(default=0.0, null=False)
     totalBillingUnits = models.FloatField(default=0, null=False)
-    createdAt = models.DateTimeField(default=timezone.now)
-    updatedAt = models.DateTimeField(default=timezone.now)
+    createdAt = models.DateTimeField(default=time)
+    updatedAt = models.DateTimeField(default=time)
 
     def getTotalBillingUnits(self):
         totalBillingUnits = self.totalDuration / 15
