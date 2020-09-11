@@ -15,7 +15,11 @@ from django.views.generic import (
          )
 from .models import LogPost, DailyAggregator, DailyReport
 
+<<<<<<< HEAD
 class PostListView(LoginRequiredMixin,ListView):
+=======
+class PostListView(LoginRequiredMixin, ListView):
+>>>>>>> bc139d7ff5b4eeaecf1a1c8a74d291d42d4c5cd3
     model = LogPost
     template_name ='logsheet/home.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'logposts'
